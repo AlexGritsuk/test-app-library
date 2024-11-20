@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import booksReducer from "./bookReducer";
 import genresReducer from "./genres";
 import authorsReducer from "./authors";
+import commentsReducer from "./comment";
 
 const store = configureStore({
   reducer: {
     books: booksReducer,
     genres: genresReducer,
     authors: authorsReducer,
+    comments: commentsReducer,
   },
 });
 

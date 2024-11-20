@@ -3,6 +3,8 @@ import { useAppDispatch } from "../../hooks";
 import { removeBook } from "../../store/bookReducer";
 import ModalWindow from "../modalWindow/modalWindow";
 import ModalFormEdit from "../../pages/modalFormEdit/modalFormEdit";
+import { Link } from "react-router-dom";
+import CardBody from "../cardBody/cardBody";
 
 interface CardProps {
   title: string;
@@ -18,31 +20,28 @@ const Card = ({ title, authorName, genres, id }: CardProps): JSX.Element => {
   };
   const handleModalClose = () => {
     setModalActive(false);
-  };  
+  };
 
   const dispatch = useAppDispatch();
   return (
     <div className="card text-center position-relative">
-      <div className="card-header">{title}</div>
-      <div className="card-body">
-        <h5 className="card-title">{authorName}</h5>
-        <p className="card-text">{genres.map((el: any) => el.name)}</p>
-        <button
-          type="button"
-          className="btn position-absolute top-0 start-0"
-          onClick={handleModalOpen}
-        >
-          <i className="bi bi-pencil-square"></i>
-        </button>
-        <button
-          type="button"
-          className="btn position-absolute top-0 end-0"
-          onClick={() => dispatch(removeBook(id))}
-        >
-          <i className="bi bi-x-circle-fill"></i>
-        </button>
-      </div>
-      <div className="card-footer text-body-secondary">2 days ago</div>
+      <Link to={`/Books/${id}`}>
+        <CardBody title={title} authorName={authorName} genres={genres} />
+      </Link>
+      <button
+        type="button"
+        className="btn position-absolute top-0 start-0"
+        onClick={handleModalOpen}
+      >
+        <i className="bi bi-pencil-square"></i>
+      </button>
+      <button
+        type="button"
+        className="btn position-absolute top-0 end-0"
+        onClick={() => dispatch(removeBook(id))}
+      >
+        <i className="bi bi-x-circle-fill"></i>
+      </button>
       <div>
         {isModalActive && (
           <ModalWindow title="Отредактируйте книгу" onClose={handleModalClose}>

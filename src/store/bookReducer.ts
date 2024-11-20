@@ -129,6 +129,11 @@ export const removeBook = (id: number) => (dispatch: Function) => {
 export const getBooks = () => (state: any) => {
   return state.books.entities;
 };
+export const getBookById = (bookId: string) => (state: any) => {
+  if (state.books.entities) {
+    return state.books.entities.find((book: any) => book.id == bookId);
+  }
+};
 
 export const getCurrentPage = () => (state: any) => {
   return state.books.pagination;
